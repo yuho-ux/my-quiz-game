@@ -1,4 +1,33 @@
 def main():
+    class Quiz:
+        def __init__(self, question, choices, answer):
+            """
+            question: 문제 내용 (문자열)
+            choices: 4개의 보기 (리스트)
+            answer: 정답 번호 (1~4 사이 정수)
+            """
+            self.question = question
+            self.choices = choices
+            self.answer = answer
+
+        def display_quiz(self):
+            """문제를 화면에 출력합니다."""
+            print(f"\nQ. {self.question}")
+            for i, choice in enumerate(self.choices, 1):
+                print(f"{i}) {choice}")
+
+        def is_correct(self, user_answer):
+            """사용자가 입력한 번호가 정답인지 확인합니다."""
+            return str(self.answer) == user_answer
+        
+    quizzes = [
+        Quiz("도커에서 실행 중인 컨테이너 목록을 확인하는 명령어는?", ["docker run", "docker ps", "docker images", "docker build"], 2),
+        Quiz("Git에서 변경 사항을 스냅샷으로 기록하는 명령어는?", ["git add", "git push", "git commit", "git pull"], 3),
+        Quiz("Dockerfile에서 베이스 이미지를 지정하는 명령어는?", ["FROM", "COPY", "RUN", "CMD"], 1),
+        Quiz("Python에서 무한 반복을 만들기 위해 사용하는 문구는?", ["if True", "while True", "for True", "repeat"], 2),
+        Quiz("GitHub에 내 코드를 전송하는 명령어는?", ["git commit", "git push", "git pull", "git init"], 2)
+    ]
+
     while True:
         print("\n=== 유호의 퀴즈 게임 ===")
         print("1. 퀴즈 풀기")
