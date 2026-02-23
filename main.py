@@ -59,7 +59,25 @@ def main():
             print(f"\n--- 게임 종료! 당신의 점수는 {score}/{len(quizzes)}입니다. ---")
             
         elif choice == "2":
-            print("\n[알림] 퀴즈 추가 기능을 준비 중입니다.")
+            print("\n--- 새로운 퀴즈 추가 ---")
+            question = input("문제를 입력하세요: ")
+            
+            choices = []
+            for i in range(1, 5):
+                choice_text = input(f"보기 {i}번 내용을 입력하세요: ")
+                choices.append(choice_text)
+            
+            while True:
+                answer = input("정답 번호를 입력하세요 (1~4): ")
+                if answer in ["1", "2", "3", "4"]:
+                    break
+                print("[오류] 1에서 4 사이의 숫자만 입력해주세요.")
+            
+            # 새로운 Quiz 객체 생성 및 리스트 추가
+            new_quiz = Quiz(question, choices, int(answer))
+            quizzes.append(new_quiz)
+            print("\n[알림] 퀴즈가 성공적으로 추가되었습니다!")
+            
         elif choice == "3":
             print("\n[알림] 퀴즈 목록 보기 기능을 준비 중입니다.")
         elif choice == "4":
