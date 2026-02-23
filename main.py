@@ -39,7 +39,25 @@ def main():
         choice = input("원하는 메뉴 번호를 입력하세요: ")
         
         if choice == "1":
-            print("\n[알림] 퀴즈 풀기 기능을 준비 중입니다.")
+            if not quizzes:
+                print("\n[알림] 등록된 퀴즈가 없습니다.")
+                continue
+            
+            score = 0
+            print(f"\n--- 퀴즈를 시작합니다! (총 {len(quizzes)}문제) ---")
+            
+            for quiz in quizzes:
+                quiz.display_quiz() # 문제 출력
+                user_input = input("정답 번호를 입력하세요: ")
+                
+                if quiz.is_correct(user_input):
+                    print("⭕ 정답입니다!")
+                    score += 1
+                else:
+                    print(f"❌ 틀렸습니다! 정답은 {quiz.answer}번입니다.")
+            
+            print(f"\n--- 게임 종료! 당신의 점수는 {score}/{len(quizzes)}입니다. ---")
+            
         elif choice == "2":
             print("\n[알림] 퀴즈 추가 기능을 준비 중입니다.")
         elif choice == "3":
