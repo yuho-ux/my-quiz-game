@@ -1,3 +1,4 @@
+import json # 파일 맨 윗줄에 추가하세요!
 
 class Quiz:
     def __init__(self, question, choices, answer):
@@ -53,6 +54,7 @@ class QuizGame:
         if score > self.top_score:
             self.top_score = score
             print("✨ 최고 점수를 경신했습니다!")
+            self.save_data()  # <--- 점수가 바뀌었으니 파일에 저장!
 
     def add_quiz(self):
         print("\n--- 새로운 퀴즈 추가 ---")
@@ -66,6 +68,7 @@ class QuizGame:
         
         self.quizzes.append(Quiz(question, choices, int(answer)))
         print("[알림] 퀴즈가 추가되었습니다!")
+        self.save_data()  # <--- 이 줄을 추가해서 파일에 즉시 저장
 
     def list_quizzes(self):
         if not self.quizzes:
@@ -74,6 +77,37 @@ class QuizGame:
         print("\n--- 📜 현재 등록된 퀴즈 목록 ---")
         for i, quiz in enumerate(self.quizzes, 1):
             print(f"{i}. {quiz.question}")
+
+    def save_data(self):
+        """퀴즈 목록과 최고 점수를 JSON 파일로 저장합니다."""
+        data = {
+            "top_score": self.top_score,
+            "quizzes": []
+        }
+        for q in self.quizzes:
+            data["quizzes"].append({
+                "question": q.question,
+                "choices": q.choices,
+                "answer": q.answer
+            })
+        
+        with open("quiz_data.json", "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=4)
+        print("[시스템] 데이터가 안전하게 저장되었습니다.")
+
+    def load_data(self):
+        """JSON 파일에서 데이터를 불러옵니다. 파일이 없으면 에러 처리를 합니다."""
+        try:
+            with open("quiz_data.json", "r", encoding="utf-8") as f:
+                data = json.load(f)
+                self.top_score = data["top_score"]
+                # JSON 텍스트 데이터를 다시 Quiz 객체 리스트로 변환
+                self.quizzes = []
+                for item in data["quizzes"]:
+                    self.quizzes.append(Quiz(item["question"], item["choices"], item["answer"]))
+                print("[시스템] 데이터를 성공적으로 불러왔습니다.")
+        except FileNotFoundError:
+            print("[시스템] 저장된 파일이 없어 기본 데이터를 사용합니다.")
        
 def main():        
     # 1. 초기 퀴즈 데이터 생성
@@ -88,6 +122,7 @@ def main():
     # 2. 매니저(QuizGame 객체) 고용!
     # 이제부터 모든 복잡한 일은 game이 알아서 할 겁니다.
     game = QuizGame(quizzes)
+    game.load_data()  # 저장된 파일이 있으면 불러오고, 없으면 기본 데이터 사용
 
     while True:
         # 3. 매니저에게 메뉴판 보여달라고 하기
