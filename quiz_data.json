@@ -1,5 +1,12 @@
 {
-    "top_score": 0,
+    "top_score": 3.0,
+    "history": [
+        {
+            "date": "2026-02-24 17:46:42",
+            "total_questions": 5,
+            "final_score": 2.0
+        }
+    ],
     "quizzes": [
         {
             "question": "도커에서 실행 중인 컨테이너 목록을 확인하는 명령어는?",
@@ -9,7 +16,8 @@
                 "docker images",
                 "docker build"
             ],
-            "answer": 2
+            "answer": 2,
+            "hint": "힌트가 없습니다."
         },
         {
             "question": "Git에서 변경 사항을 스냅샷으로 기록하는 명령어는?",
@@ -19,7 +27,8 @@
                 "git commit",
                 "git pull"
             ],
-            "answer": 3
+            "answer": 3,
+            "hint": "힌트가 없습니다."
         },
         {
             "question": "Dockerfile에서 베이스 이미지를 지정하는 명령어는?",
@@ -29,7 +38,8 @@
                 "RUN",
                 "CMD"
             ],
-            "answer": 1
+            "answer": 1,
+            "hint": "힌트가 없습니다."
         },
         {
             "question": "Python에서 무한 반복을 만들기 위해 사용하는 문구는?",
@@ -39,7 +49,8 @@
                 "for True",
                 "repeat"
             ],
-            "answer": 2
+            "answer": 2,
+            "hint": "힌트가 없습니다."
         },
         {
             "question": "GitHub에 내 코드를 전송하는 명령어는?",
@@ -49,17 +60,8 @@
                 "git pull",
                 "git init"
             ],
-            "answer": 2
-        },
-        {
-            "question": "test",
-            "choices": [
-                "1",
-                "1",
-                "1",
-                "1"
-            ],
-            "answer": 1
+            "answer": 2,
+            "hint": "힌트가 없습니다."
         }
     ]
 }
